@@ -1,0 +1,35 @@
+# php-code
+<!doctype html>
+<html lang="ru">
+<head>
+</head>
+<body>
+<?php
+$host="";
+$user="";
+$pass=""; 
+$db_name="";
+$connect=mysqli_connect($host,$user,$pass,$db_name);
+mysqli_query($connect, "SET NAMES utf8");
+//Если переменная Name передана
+if (isset($_POST["$nomer"])) {
+    //Вставляем данные, подставляя их в запрос
+    $sql = mysqli_query($connect,"INSERT INTO `Reservation` (`$mesta`,`$nomer`, `$data`,`$time`) VALUES ('".$_POST['$mesta']."','".$_POST['$nomer']."','".$_POST['$data']."','".$_POST['$time']."')");
+    //Если вставка прошла успешно
+    if ($sql) {
+        echo "<p>Данные успешно добавлены в таблицу.</p>";
+    } else {
+        echo "<p>Произошла ошибка.</p>";
+    }
+}
+$sql = mysqli_query($connect,"SELECT `$mesta`, `$nomer`, `$data`, `$time` FROM `Reservation`");
+    while ($result = mysql_fetch_array($sql)) {
+        echo $result['nomer']." Время: ".$result['time']." часов<br>";
+    }
+?>
+<table>
+
+</table>
+
+
+</body>
